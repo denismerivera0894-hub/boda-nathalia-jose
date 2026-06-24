@@ -15,6 +15,8 @@ async function cargarInvitado() {
         .eq("codigo", codigo)
         .single();
 
+         window.invitadoActual = data;
+
     if (error) {
 
         document.getElementById("datosInvitado").innerHTML = `
@@ -105,7 +107,11 @@ async function confirmarAsistencia(){
     if(acompanantesVacios > 0){
 
         const continuar = confirm(
-            `No ha registrado todos los acompañantes.\n\nSi confirma ahora, posteriormente no podrá agregar más personas.\n\n¿Desea continuar?`
+            `No ha registrado todos los acompañantes.
+
+Si confirma ahora, posteriormente no podrá agregar más personas.
+
+¿Desea continuar?`
         );
 
         if(!continuar){
@@ -113,5 +119,55 @@ async function confirmarAsistencia(){
         }
     }
 
-    alert("Confirmación recibida correctamente.");
+    const invitado = window.invitadoActual;
+
+    const { error:updateError } = await supabaseClient
+        .from("invitados")
+        .update({
+            confirmado:true,
+            fecha_confirmacion:new Date().toISOString()
+        })
+        .eq("id", invitado.id);
+
+    if(updateError){
+
+        alert("Error actualizando invitado");
+
+        console.error(updateError);
+
+        return;
+    }
+
+    for(const input of inputs){
+
+        const nombre = input.value.trim();
+
+        if(nombre === ""){
+            continue;
+        }
+
+        const { error:acompError } =
+            await supabaseClient
+            .from("acompanantes")
+            .insert({
+                invitado_id: invitado.id,
+                nombre: nombre
+            });
+
+        if(acompError){
+
+            console.error(acompError);
+
+            alert(
+                "Error guardando acompañantes"
+            );
+
+            return;
+        }
+    }
+
+    alert(
+        "🎉 Gracias por confirmar tu asistencia."
+    );
+
 }
