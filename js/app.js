@@ -82,6 +82,22 @@ for(let i = 1; i < data.cupos; i++){
 
     document.getElementById("datosInvitado").innerHTML = `
 
+    const qrDiv = document.getElementById("codigoQR");
+
+QRCode.toCanvas(
+    document.createElement("canvas"),
+    codigo,
+    function(error, canvas){
+
+        if(error){
+            console.error(error);
+            return;
+        }
+
+        qrDiv.appendChild(canvas);
+    }
+);
+
 <div style="
     margin-top:30px;
     padding:25px;
@@ -123,22 +139,6 @@ for(let i = 1; i < data.cupos; i++){
     
 
 document.getElementById("datosInvitado").innerHTML = `
-
-const qrDiv = document.getElementById("codigoQR");
-
-QRCode.toCanvas(
-    document.createElement("canvas"),
-    codigo,
-    function(error, canvas){
-
-        if(error){
-            console.error(error);
-            return;
-        }
-
-        qrDiv.appendChild(canvas);
-    }
-);
 
 <div style="
     margin-top:30px;
