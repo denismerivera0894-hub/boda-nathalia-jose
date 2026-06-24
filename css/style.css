@@ -10,15 +10,19 @@ html{
 }
 
 body{
-    font-family: Georgia, serif;
+    font-family:Georgia, serif;
+
     background:
-linear-gradient(
-180deg,
-#fffdf7 0%,
-#F8F1D6 50%,
-#fffdf7 100%
-);
+    radial-gradient(
+        circle at top,
+        #fffdf7,
+        #F8F1D6 60%,
+        #f6ecd0
+    );
+
     color:#4D0011;
+
+    overflow-x:hidden;
 }
 
 .hero{
@@ -55,6 +59,9 @@ linear-gradient(
     justify-content:center;
     font-size:2rem;
     color:#DBBE9B;
+    
+    box-shadow:
+    0 0 30px rgba(219,190,155,.15);
 }
 
 .decoracion{
@@ -94,6 +101,11 @@ linear-gradient(
     font-size:1rem;
     cursor:pointer;
     transition:.3s;
+
+    letter-spacing:2px;
+    font-weight:600;
+    box-shadow:
+    0 10px 25px rgba(77,0,17,.20);
 }
 
 .btn:hover{
@@ -231,4 +243,15 @@ linear-gradient(
         transform:translateY(0);
     }
 
+}
+
+.marco{
+    position:fixed;
+    top:20px;
+    left:20px;
+    right:20px;
+    bottom:20px;
+    border:1px solid rgba(219,190,155,.45);
+    pointer-events:none;
+    z-index:1;
 }
