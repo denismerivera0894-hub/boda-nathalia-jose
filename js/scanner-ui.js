@@ -1,0 +1,2 @@
+personas
+ingresos
