@@ -74,17 +74,51 @@ async function registrarIngreso(codigo){
     `;
 }
 
-function onScanSuccess(decodedText){
+const html5QrCode =
+    new Html5Qrcode("reader");
 
-    registrarIngreso(decodedText);
+async function iniciarCamara(){
+
+    try{
+
+        const devices =
+            await Html5Qrcode.getCameras();
+
+        if(devices.length === 0){
+
+            alert(
+                "No se encontró cámara"
+            );
+
+            return;
+        }
+
+        let cameraId =
+            devices[devices.length - 1].id;
+
+        await html5QrCode.start(
+            cameraId,
+            {
+                fps:10,
+                qrbox:250
+            },
+            async (decodedText)=>{
+
+                await registrarIngreso(
+                    decodedText
+                );
+
+            }
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Error iniciando cámara"
+        );
+    }
 }
 
-const html5QrCode = new Html5QrcodeScanner(
-    "reader",
-    {
-        fps:10,
-        qrbox:250
-    }
-);
-
-html5QrCode.render(onScanSuccess);
+iniciarCamara();
