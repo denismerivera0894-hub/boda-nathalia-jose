@@ -5,3 +5,86 @@ const supabaseClient = supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+
+
+async function registrarIngreso(codigo){
+
+    const resultado =
+        document.getElementById("resultado");
+
+    const { data: invitado } =
+    await supabaseClient
+        .from("invitados")
+        .select("*")
+        .eq("codigo", codigo)
+        .single();
+
+    if(!invitado){
+
+        resultado.innerHTML = `
+            <div class="card error">
+                <h2>❌ Invitado no encontrado</h2>
+            </div>
+        `;
+
+        return;
+    }
+
+    const { data: ingresoExistente } =
+    await supabaseClient
+        .from("ingresos")
+        .select("*")
+        .eq("invitado_id", invitado.id)
+        .maybeSingle();
+
+    if(ingresoExistente){
+
+        resultado.innerHTML = `
+            <div class="card error">
+                <h2>⚠️ Ya ingresó</h2>
+
+                <h3>${invitado.nombre}</h3>
+            </div>
+        `;
+
+        return;
+    }
+
+    await supabaseClient
+        .from("ingresos")
+        .insert({
+            invitado_id: invitado.id,
+            fecha_ingreso:
+                new Date().toISOString()
+        });
+
+    resultado.innerHTML = `
+        <div class="card ok">
+
+            <h2>✅ Ingreso autorizado</h2>
+
+            <h3>${invitado.nombre}</h3>
+
+            <p>
+                Cupos:
+                ${invitado.cupos}
+            </p>
+
+        </div>
+    `;
+}
+
+function onScanSuccess(decodedText){
+
+    registrarIngreso(decodedText);
+}
+
+const html5QrCode = new Html5QrcodeScanner(
+    "reader",
+    {
+        fps:10,
+        qrbox:250
+    }
+);
+
+html5QrCode.render(onScanSuccess);
