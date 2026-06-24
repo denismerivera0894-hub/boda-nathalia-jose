@@ -1,31 +1,50 @@
 
-const fechaBoda = new Date("August 14, 2026 17:00:00").getTime();
+const params = new URLSearchParams(window.location.search);
 
-setInterval(() => {
+const codigo = params.get("codigo");
 
-    const ahora = new Date().getTime();
-    const diferencia = fechaBoda - ahora;
+async function cargarInvitado() {
 
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    if (!codigo) {
+        return;
+    }
 
-    const horas = Math.floor(
-        (diferencia % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-    );
+    const { data, error } = await supabaseClient
+        .from("invitados")
+        .select("*")
+        .eq("codigo", codigo)
+        .single();
 
-    const minutos = Math.floor(
-        (diferencia % (1000 * 60 * 60))
-        / (1000 * 60)
-    );
+    if (error) {
 
-    const segundos = Math.floor(
-        (diferencia % (1000 * 60))
-        / 1000
-    );
+        document.getElementById("datosInvitado").innerHTML = `
+            <p style="margin-top:20px;color:red;">
+                Invitación no encontrada
+            </p>
+        `;
 
-    document.getElementById("dias").textContent = dias;
-    document.getElementById("horas").textContent = horas;
-    document.getElementById("minutos").textContent = minutos;
-    document.getElementById("segundos").textContent = segundos;
+        return;
+    }
 
-},1000);
+    document.getElementById("datosInvitado").innerHTML = `
+        <div style="
+            margin-top:30px;
+            padding:20px;
+            background:white;
+            border-radius:12px;
+            max-width:400px;
+            margin-left:auto;
+            margin-right:auto;
+        ">
+
+            <h3>Bienvenido</h3>
+
+            <p>${data.nombre}</p>
+
+            <p>Cupos asignados: ${data.cupos}</p>
+
+        </div>
+    `;
+}
+
+cargarInvitado();
