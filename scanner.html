@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Control de Ingreso</title>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#F8F1D6;
+    padding:20px;
+    text-align:center;
+}
+
+h1{
+    color:#7B1830;
+}
+
+#reader{
+    max-width:500px;
+    margin:20px auto;
+}
+
+#resultado{
+    margin-top:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.ok{
+    border-left:6px solid green;
+}
+
+.error{
+    border-left:6px solid red;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Control de Ingreso</h1>
+
+<div id="reader"></div>
+
+<div id="resultado"></div>
+
+<script src="js/scanner.js"></script>
+
+</body>
+</html>
