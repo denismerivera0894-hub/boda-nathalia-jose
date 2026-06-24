@@ -1,1 +1,172 @@
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family: Georgia, serif;
+    background:#F8F1D6;
+    color:#4D0011;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:linear-gradient(
+        rgba(248,241,214,.92),
+        rgba(248,241,214,.92)
+    );
+    padding:40px 20px;
+}
+
+.overlay{
+    max-width:700px;
+}
+
+.subtitulo{
+    letter-spacing:4px;
+    color:#7B1830;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:5rem;
+    color:#7B1830;
+    font-weight:300;
+}
+
+.ampersand{
+    font-size:4rem;
+    color:#DBBE9B;
+    margin:10px 0;
+}
+
+.fecha{
+    margin-top:30px;
+    font-size:1.4rem;
+    letter-spacing:4px;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:35px;
+    background:#7B1830;
+    color:white;
+    text-decoration:none;
+    border:none;
+    border-radius:8px;
+    padding:16px 40px;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#4D0011;
+}
+
+.contador{
+    padding:100px 20px;
+    text-align:center;
+    background:white;
+}
+
+.contador h2{
+    margin-bottom:40px;
+    color:#7B1830;
+}
+
+#countdown{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+#countdown div{
+    min-width:120px;
+}
+
+#countdown span{
+    font-size:4rem;
+    color:#7B1830;
+    display:block;
+}
+
+#countdown small{
+    letter-spacing:2px;
+}
+
+.evento{
+    padding:100px 20px;
+    text-align:center;
+}
+
+.evento h2{
+    margin-bottom:50px;
+    color:#7B1830;
+}
+
+.card{
+    max-width:600px;
+    margin:25px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card h3{
+    color:#7B1830;
+    margin-bottom:15px;
+}
+
+.card p{
+    margin:8px 0;
+}
+
+.confirmacion{
+    background:#4D0011;
+    color:white;
+    text-align:center;
+    padding:100px 20px;
+}
+
+.confirmacion h2{
+    margin-bottom:25px;
+}
+
+.confirmacion .btn{
+    background:#DBBE9B;
+    color:#4D0011;
+    font-weight:bold;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:3.5rem;
+}
+
+.ampersand{
+    font-size:3rem;
+}
+
+#countdown span{
+    font-size:2.5rem;
+}
+
+#countdown{
+    gap:20px;
+}
+
+}
