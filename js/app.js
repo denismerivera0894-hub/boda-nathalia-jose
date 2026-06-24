@@ -51,6 +51,49 @@ for(let i = 1; i < data.cupos; i++){
     `;
 }
 
+    if(data.confirmado){
+
+        const fecha = new Date(
+    data.fecha_confirmacion
+).toLocaleString("es-HN");
+
+    document.getElementById("datosInvitado").innerHTML = `
+
+<div style="
+    margin-top:30px;
+    padding:25px;
+    background:white;
+    border-radius:12px;
+    max-width:500px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+">
+
+    <h2 style="color:#7B1830;">
+        ✅ Asistencia confirmada
+    </h2>
+
+    <h3>
+        ${data.nombre}
+    </h3>
+
+    <p>
+        Gracias por confirmar tu asistencia.
+    </p>
+
+    <p>
+        Confirmado el:
+        <br>
+        <strong>${fecha}</strong>
+    </p>
+
+</div>
+`;
+
+    return;
+}
+
 document.getElementById("datosInvitado").innerHTML = `
 
 <div style="
@@ -89,6 +132,19 @@ document.getElementById("datosInvitado").innerHTML = `
 cargarInvitado();
 
 async function confirmarAsistencia(){
+
+    const { data: invitadoActual } = await supabaseClient
+    .from("invitados")
+    .select("confirmado")
+    .eq("codigo", codigo)
+    .single();
+
+if(invitadoActual.confirmado){
+
+    alert("Esta invitación ya fue confirmada.");
+
+    return;
+}
 
     let acompanantesVacios = 0;
 
