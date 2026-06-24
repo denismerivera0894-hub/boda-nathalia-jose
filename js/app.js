@@ -121,9 +121,17 @@ for(let i = 1; i < data.cupos; i++){
     const qrDiv = document.getElementById("codigoQR");
 
     QRCode.toCanvas(
-        document.createElement("canvas"),
-        codigo,
-        function(error, canvas){
+    document.createElement("canvas"),
+    codigo,
+    {
+        width: 220,
+        margin: 2,
+        color: {
+            dark: "#4D0011",
+            light: "#FFFFFF"
+        }
+    },
+    function(error, canvas){
 
             if(error){
                 console.error(error);
