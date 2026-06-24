@@ -99,11 +99,14 @@ async function iniciarCamara(){
             devices[devices.length - 1].id;
 
         await html5QrCode.start(
-            cameraId,
-            {
-                fps:10,
-                qrbox:250
-            },
+    {
+        facingMode: "environment"
+    },
+    {
+        fps:10,
+        qrbox:250,
+        aspectRatio:1.0
+    },
             async (decodedText)=>{
 
     if(!escaneoActivo){
