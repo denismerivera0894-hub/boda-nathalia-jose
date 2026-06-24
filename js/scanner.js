@@ -77,6 +77,8 @@ async function registrarIngreso(codigo){
 const html5QrCode =
     new Html5Qrcode("reader");
 
+let escaneoActivo = true;
+
 async function iniciarCamara(){
 
     try{
