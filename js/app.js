@@ -136,9 +136,6 @@ for(let i = 1; i < data.cupos; i++){
 
     return;
 }
-
-    return;
-}
     
 
 document.getElementById("datosInvitado").innerHTML = `
