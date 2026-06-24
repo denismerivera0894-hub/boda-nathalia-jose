@@ -26,15 +26,25 @@ body{
 }
 
 .hero{
+
     min-height:100vh;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     text-align:center;
+
+    position:relative;
+    z-index:2;
+
     background:linear-gradient(
         rgba(248,241,214,.92),
         rgba(248,241,214,.92)
     );
+
     padding:40px 20px;
 }
 
@@ -254,4 +264,37 @@ body{
     border:1px solid rgba(219,190,155,.45);
     pointer-events:none;
     z-index:1;
+}
+
+.flor-si,
+.flor-sd,
+.flor-ii,
+.flor-id{
+    position:fixed;
+    z-index:0;
+    pointer-events:none;
+}
+
+.flor-si{
+    top:0;
+    left:0;
+    width:260px;
+}
+
+.flor-sd{
+    top:0;
+    right:0;
+    width:260px;
+}
+
+.flor-ii{
+    bottom:0;
+    left:0;
+    width:260px;
+}
+
+.flor-id{
+    bottom:0;
+    right:0;
+    width:260px;
 }
