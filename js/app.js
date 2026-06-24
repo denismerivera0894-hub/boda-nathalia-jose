@@ -85,3 +85,33 @@ document.getElementById("datosInvitado").innerHTML = `
 }
 
 cargarInvitado();
+
+async function confirmarAsistencia(){
+
+    let acompanantesVacios = 0;
+
+    const card = document.getElementById("datosInvitado");
+
+    const inputs = card.querySelectorAll('input[id^="acompanante"]');
+
+    inputs.forEach(input => {
+
+        if(input.value.trim() === ""){
+            acompanantesVacios++;
+        }
+
+    });
+
+    if(acompanantesVacios > 0){
+
+        const continuar = confirm(
+            `No ha registrado todos los acompañantes.\n\nSi confirma ahora, posteriormente no podrá agregar más personas.\n\n¿Desea continuar?`
+        );
+
+        if(!continuar){
+            return;
+        }
+    }
+
+    alert("Confirmación recibida correctamente.");
+}
