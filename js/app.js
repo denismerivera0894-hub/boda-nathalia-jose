@@ -26,25 +26,62 @@ async function cargarInvitado() {
         return;
     }
 
-    document.getElementById("datosInvitado").innerHTML = `
-        <div style="
-            margin-top:30px;
-            padding:20px;
-            background:white;
-            border-radius:12px;
-            max-width:400px;
-            margin-left:auto;
-            margin-right:auto;
-        ">
+    let camposAcompanantes = "";
 
-            <h3>Bienvenido</h3>
+for(let i = 1; i < data.cupos; i++){
 
-            <p>${data.nombre}</p>
+    camposAcompanantes += `
+        <div style="margin-top:15px">
+            <label>
+                Acompañante ${i}
+            </label>
 
-            <p>Cupos asignados: ${data.cupos}</p>
-
+            <input
+                type="text"
+                id="acompanante${i}"
+                style="
+                    width:100%;
+                    padding:10px;
+                    margin-top:5px;
+                "
+            >
         </div>
     `;
+}
+
+document.getElementById("datosInvitado").innerHTML = `
+
+<div style="
+    margin-top:30px;
+    padding:20px;
+    background:white;
+    border-radius:12px;
+    max-width:450px;
+    margin-left:auto;
+    margin-right:auto;
+">
+
+    <h2>Bienvenido</h2>
+
+    <p>${data.nombre}</p>
+
+    <p>
+        Cupos asignados:
+        ${data.cupos}
+    </p>
+
+    ${camposAcompanantes}
+
+    <button
+        onclick="confirmarAsistencia()"
+        class="btn"
+        style="margin-top:20px;"
+    >
+        Confirmar asistencia
+    </button>
+
+</div>
+`;
 }
 
 cargarInvitado();
