@@ -197,18 +197,38 @@ linear-gradient(
 
 }
 
-.hero{
-    animation:fadeIn 1.5s ease;
+.fade1,
+.fade2,
+.fade3,
+.fade4,
+.fade5,
+.fade6,
+.fade7,
+.fade8{
+    opacity:0;
+    transform:translateY(15px);
+    animation:appear .8s ease forwards;
 }
 
-@keyframes fadeIn{
+.fade1{animation-delay:.2s;}
+.fade2{animation-delay:.6s;}
+.fade3{animation-delay:1s;}
+.fade4{animation-delay:1.3s;}
+.fade5{animation-delay:1.6s;}
+.fade6{animation-delay:1.9s;}
+.fade7{animation-delay:2.2s;}
+.fade8{animation-delay:2.5s;}
+
+@keyframes appear{
+
     from{
         opacity:0;
-        transform:translateY(30px);
+        transform:translateY(15px);
     }
 
     to{
         opacity:1;
         transform:translateY(0);
     }
+
 }
