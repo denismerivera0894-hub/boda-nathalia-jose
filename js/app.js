@@ -17,6 +17,26 @@ async function cargarInvitado() {
 
          window.invitadoActual = data;
 
+     const { data: acompanantes } = await supabaseClient
+    .from("acompanantes")
+    .select("nombre")
+    .eq("invitado_id", data.id);
+
+    let listaAcompanantes = "";
+
+if(acompanantes && acompanantes.length > 0){
+
+    listaAcompanantes = `
+        <div style="margin-top:20px;">
+            <h4>Acompañantes registrados</h4>
+
+            ${acompanantes.map(a => `
+                <p>• ${a.nombre}</p>
+            `).join("")}
+        </div>
+    `;
+}
+
     if (error) {
 
         document.getElementById("datosInvitado").innerHTML = `
@@ -94,26 +114,6 @@ for(let i = 1; i < data.cupos; i++){
 `;
 
     return;
-}
-
-    const { data: acompanantes } = await supabaseClient
-    .from("acompanantes")
-    .select("nombre")
-    .eq("invitado_id", data.id);
-
-    let listaAcompanantes = "";
-
-if(acompanantes && acompanantes.length > 0){
-
-    listaAcompanantes = `
-        <div style="margin-top:20px;">
-            <h4>Acompañantes registrados</h4>
-
-            ${acompanantes.map(a => `
-                <p>• ${a.nombre}</p>
-            `).join("")}
-        </div>
-    `;
 }
     
 
@@ -219,6 +219,11 @@ Si confirma ahora, posteriormente no podrá agregar más personas.
 
     for(const input of inputs){
 
+        await supabaseClient
+    .from("acompanantes")
+    .delete()
+    .eq("invitado_id", invitado.id);
+
         const nombre = input.value.trim();
 
         if(nombre === ""){
@@ -248,5 +253,6 @@ Si confirma ahora, posteriormente no podrá agregar más personas.
     alert(
         "🎉 Gracias por confirmar tu asistencia."
     );
+    await cargarInvitado();
 
 }
