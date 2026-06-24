@@ -11,7 +11,13 @@ html{
 
 body{
     font-family: Georgia, serif;
-    background:#F8F1D6;
+    background:
+linear-gradient(
+180deg,
+#fffdf7 0%,
+#F8F1D6 50%,
+#fffdf7 100%
+);
     color:#4D0011;
 }
 
