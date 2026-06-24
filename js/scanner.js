@@ -106,11 +106,22 @@ async function iniciarCamara(){
             },
             async (decodedText)=>{
 
-                await registrarIngreso(
-                    decodedText
-                );
+    if(!escaneoActivo){
+        return;
+    }
 
-            }
+    escaneoActivo = false;
+
+    await registrarIngreso(
+        decodedText
+    );
+
+    setTimeout(()=>{
+
+        escaneoActivo = true;
+
+    },3000);
+}
         );
 
     }catch(error){
