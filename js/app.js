@@ -22,6 +22,9 @@ async function cargarInvitado() {
     .select("nombre")
     .eq("invitado_id", data.id);
 
+    console.log("Invitado:", data.id);
+    console.log("Acompañantes encontrados:", acompanantes);
+
     let listaAcompanantes = "";
 
 if(acompanantes && acompanantes.length > 0){
@@ -217,12 +220,12 @@ Si confirma ahora, posteriormente no podrá agregar más personas.
         return;
     }
 
-    for(const input of inputs){
-
-        await supabaseClient
+    await supabaseClient
     .from("acompanantes")
     .delete()
     .eq("invitado_id", invitado.id);
+
+    for(const input of inputs){
 
         const nombre = input.value.trim();
 
