@@ -82,6 +82,8 @@ for(let i = 1; i < data.cupos; i++){
         Gracias por confirmar tu asistencia.
     </p>
 
+    ${listaAcompanantes}
+
     <p>
         Confirmado el:
         <br>
@@ -93,6 +95,27 @@ for(let i = 1; i < data.cupos; i++){
 
     return;
 }
+
+    const { data: acompanantes } = await supabaseClient
+    .from("acompanantes")
+    .select("nombre")
+    .eq("invitado_id", data.id);
+
+    let listaAcompanantes = "";
+
+if(acompanantes && acompanantes.length > 0){
+
+    listaAcompanantes = `
+        <div style="margin-top:20px;">
+            <h4>Acompañantes registrados</h4>
+
+            ${acompanantes.map(a => `
+                <p>• ${a.nombre}</p>
+            `).join("")}
+        </div>
+    `;
+}
+    
 
 document.getElementById("datosInvitado").innerHTML = `
 
